@@ -5,7 +5,7 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 - [Timeout Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/timeoutReservationMaker.js)
 -- This script uses a configurable delay between actions. The purpose of this delay is to wait for api calls and loading times.
 - [Async Function Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/asyncReservationMaker.js)
--- This script is based on async function calls and can detect when the epic pass reservation page is loading. This checks availablility at a theoretically optimal rate. ***Warning: this has not been tested as well as the timeout based script (that said I'm pretty much only planning on updating the async script with feature improvements*** 
+-- This script is based on async function calls and can detect when the epic pass reservation page is loading. This checks availablility at a theoretically optimal rate. ***Warning: this has not been tested as well as the timeout based script (that said I'm pretty much only planning on updating the async script with feature improvements)*** 
 
 ## Usage Instructions
 
