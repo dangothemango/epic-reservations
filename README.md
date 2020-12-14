@@ -23,6 +23,7 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 
 ## Current Limitations
 
+- Async script doesnt work in chrome
 - Only supports one day at a time
 - Only supports days in the current month
 - Does not handle automatic session timeouts
