@@ -3,9 +3,9 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 
 ## Repo Contents
 - [Timeout Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/timeoutReservationMaker.js)
--- This script uses a configurable delay between actions. The purpose of this delay is to wait for api calls and loading times.
+  - This script uses a configurable delay between actions. The purpose of this delay is to wait for api calls and loading times.
 - [Async Function Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/asyncReservationMaker.js)
--- This script is based on async function calls and can detect when the epic pass reservation page is loading. This checks availablility at a theoretically optimal rate. ***Warning: this has not been tested as well as the timeout based script (that said I'm pretty much only planning on updating the async script with feature improvements)*** 
+  - This script is based on async function calls and can detect when the epic pass reservation page is loading. This checks availablility at a theoretically optimal rate. ***Warning: this has not been tested as well as the timeout based script (that said I'm pretty much only planning on updating the async script with feature improvements)*** 
 
 ## Usage Instructions
 
@@ -26,6 +26,6 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 - Only supports one day at a time
 - Only supports days in the current month
 - Does not handle automatic session timeouts
--- I tried setting it up to click the button but using a simple click event doesnt seem to be enough. Probably need to simulate another React event
+  - I tried setting it up to click the button but using a simple click event doesnt seem to be enough. Probably need to simulate another React event
 - Assumes that the passholders in question do not something preventing them from reserving on that day
--- So far the only thing i know that falls into this category is when a passholder has a reservation for said day
+  - So far the only thing i know that falls into this category is when a passholder has a reservation for said day
