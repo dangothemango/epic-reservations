@@ -1,4 +1,4 @@
-desiredDay = "21"
+desiredDays = ["21","22","23","24","25"]
 mountains = ['3']
 people = ['daniel gorman']
 
@@ -51,10 +51,10 @@ function timeout(ms) {
 async function waitForLoad() {
 	await timeout(100)
 	if ($("[class*=loading_spinner").length !== 0) {
-		//console.log('loading')
+		console.log('loading')
 		await waitForLoad()
 	} else {
-		//console.log('loaded')
+		console.log('loaded')
 	}
 }
 
@@ -62,9 +62,9 @@ async function changeMountain(val) {
 	nativeSelectValueSetter.call(mountainSelect, val)
 	mountainSelect.dispatchEvent(changeEvent)
 	$("#passHolderReservationsSearchButton").click()
-	//console.log('waiting for mountain to change')
+	console.log('waiting for mountain to change')
 	await waitForLoad()
-	//console.log('changedMountain')
+	console.log('changedMountain')
 }
 
 async function getElementForDay(day) {
@@ -85,10 +85,10 @@ async function checkPersonBoxes() {
 				if (checkbox != undefined) {
 					checkbox.checked = true
 					checkbox.click()
-					//console.log('checking passholder')
+					console.log('checking passholder')
 					await waitForLoad()
 					//TODO error handling
-					//console.log('passholder confirmed')
+					console.log('passholder confirmed')
 					checkboxFound = true
 				}
 			}
@@ -99,17 +99,14 @@ async function checkPersonBoxes() {
 
 async function reserveDay(dayElement) {
 	dayElement.click();
-	//console.log('loading checkboxes')
+	console.log('loading checkboxes')
 	await waitForLoad()
-	//console.log('checkboxes loaded')
+	console.log('checkboxes loaded')
 	if (await checkPersonBoxes()) {
 		$(".passholder_reservations__assign_passholder_modal__controls .primaryCTA")[0].click()
-		//console.log('processing reservations')
+		console.log('processing reservations')
 		await waitForLoad()
-		//console.log('reservations processed')
-		$("#terms-accepted")[0].checked = true
-		$("#terms-accepted")[0].click()
-		$(".passholder_reservations__completion__cta button")[0].click()
+		console.log('reservations processed')
 		return true
 	} else {
 		$(".passholder_reservations__assign_passholder_modal__controls .left_arrow").click()
@@ -126,16 +123,28 @@ async function nextMountain(index) {
 	}
 }
 
+async function tryReserveDay(day) {
+	console.log('trying to reserve ' + day)
+	dayElement = await getElementForDay(day)
+	return !dayElement.disabled && (await reserveDay(dayElement));
+}
+
+async function finalizeReservations() {
+	$("#terms-accepted")[0].checked = true
+	$("#terms-accepted")[0].click()
+	$(".passholder_reservations__completion__cta button")[0].click()
+}
+
 async function doTheWork(index) {
 	await changeMountain(mountains[index]);
-	dayElement = await getElementForDay(desiredDay)
-	if (dayElement.disabled) {
+	let foundDay = false
+	for (day of desiredDays) {
+		foundDay = foundDay || await tryReserveDay(day)
+	}
+	if (!foundDay) {
 		nextMountain(index)
 	} else {
-		//console.log(dayElement)
-		if (!(await reserveDay(dayElement))) {
-			nextMountain(index)
-		}
+		finalizeReservations()
 	}
 }
 
