@@ -81,7 +81,7 @@ function doTheWork(index) {
 	changeMountain(mountains[index]);
 	setTimeout(function() {
 		dayElement = getElementForDay(desiredDay)
-		if (element.disabled) {
+		if (dayElement.disabled) {
 			if (mountains.length === 1) {
 				changeMountain("209")
 				setTimeout(function() { 
