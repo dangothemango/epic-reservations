@@ -13,7 +13,7 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 2. Set top level variables
    1. Day Selection
       - `desiredDay` (timeout script only) = set this to the day of the month you are looking to reserve. it must be in the current month.
-      - `desiredDays` (async script only) = a list of the days of the month you are looking to reserve. they must be in the current month.
+      - `desiredDays` (async script only) = a list of month/day for the days youd like to reserve
    2. `mountains` = this is a list of the numerical value of the mountains you would be willing to ski/ride on that day. there is a mapping of mountain names to numbers in each script
    3. `people` = this is the list of passholders on your account you are looking to get reservations for on the given day. enter their full names.
    4. `delay` (timeout based script only) = this is the number of milliseconds between actions in the script. too low and the webpage wont load fast enough and the script will break, too high and the script may not be fast enough to reserve days for you.
@@ -25,7 +25,6 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 
 ## Current Limitations
 
-- Only supports days in the current month
 - Does not handle automatic session timeouts
   - I tried setting it up to click the button but using a simple click event doesnt seem to be enough. Probably need to simulate another React event
 - Assumes that the passholders in question do not something preventing them from reserving on that day
