@@ -1,4 +1,4 @@
-desiredDays = ["21","22"]
+desiredDays = ['12/28','12/29','12/30','12/31','1/1']
 mountains = ['3']
 people = ['daniel gorman']
 
@@ -34,6 +34,9 @@ people = ['daniel gorman']
 // Wildcat Mountain			=	"204"
 // Wilmot Mountain			=	"43"
 
+monthOrder = []
+activeMonth = new Date().getMonth()+1
+
 mountainSelect = document.getElementById('PassHolderReservationComponent_Resort_Selection')
 
 nativeSelectValueSetter = Object.getOwnPropertyDescriptor(
@@ -43,8 +46,23 @@ nativeSelectValueSetter = Object.getOwnPropertyDescriptor(
 
 changeEvent = new Event('change', { bubbles: true});
 
+async function prepareMonthOrder() {
+	currentMonth = new Date().getMonth()+1
+	for (let i = currentMonth; i < currentMonth+12; i++) {
+		monthOrder.push(i%12)
+	}
+	var index = monthOrder.indexOf(0);
+	if (index !== -1) {
+		monthOrder[index] = 12;
+	}
+	//console.log(monthOrder)
+}
 
-function timeout(ms) {
+async function resetActiveMonth() {
+	activeMonth = new Date().getMonth()+1
+}
+
+async function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -64,11 +82,58 @@ async function changeMountain(val) {
 	mountainSelect.dispatchEvent(changeEvent)
 	$("#passHolderReservationsSearchButton").click()
 	//console.log('waiting for mountain to change')
+	resetActiveMonth()
 	await waitForLoad()
 	//console.log('changedMountain')
 }
 
-async function getElementForDay(day) {
+async function increaseMonth() {
+	$("button[title='Next Month']").click()
+	activeMonth = (activeMonth + 1)%12
+	if (activeMonth === 0) {
+		activeMonth = 12
+	}
+	await waitForLoad()
+}
+
+async function decreaseMonth() {
+	$("button[title='Previous Month']").click()
+	activeMonth = (activeMonth - 1)%12
+	if (activeMonth === 0) {
+		activeMonth = 12
+	}
+	await waitForLoad()
+}
+
+async function setMonth(month) {
+	//console.log('setting month')
+	//console.log(activeMonth)
+	//console.log(month)
+	if (month === activeMonth.toString()) {
+		return
+	}
+	let activeIndex = monthOrder.indexOf(activeMonth)
+	let desiredIndex = monthOrder.indexOf(parseInt(month))
+	if (activeIndex > desiredIndex) {
+		await decreaseMonth()
+	} else {
+		await increaseMonth()
+	}
+	await setMonth(month)
+}
+
+async function getElementForDay(date) {
+	//console.log('getting day ' + date)
+	let month, day
+	if (date.includes('/')) {
+		month = date.split('/')[0]
+		day = date.split('/')[1]
+	} else {
+		month = activeMonth
+		day = date
+	}
+	//console.log(month + '/' + day)
+	await setMonth(month)
 	for (element of $(".passholder_reservations__calendar__day ")) {
         if (element.innerHTML === day) {
 			return element
@@ -150,5 +215,6 @@ async function doTheWork(index) {
 }
 
 function start() {
+	prepareMonthOrder()
 	doTheWork(0)
 }
