@@ -174,6 +174,7 @@ async function reserveDay(dayElement) {
 		return true
 	} else {
 		$(".passholder_reservations__assign_passholder_modal__controls .left_arrow").click()
+		await waitForLoad()
 		return false
 	}
 }
@@ -194,6 +195,7 @@ async function tryReserveDay(day) {
 }
 
 async function finalizeReservations() {
+	await waitForLoad()
 	$("#terms-accepted")[0].checked = true
 	$("#terms-accepted")[0].click()
 	$(".passholder_reservations__completion__cta button")[0].click()
