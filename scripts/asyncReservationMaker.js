@@ -1,4 +1,4 @@
-desiredDays = ['12/28','12/29','12/30','12/31','1/1']
+desiredDays = ['12/25','1/3']
 mountains = ['3']
 people = ['daniel gorman']
 
@@ -107,8 +107,6 @@ async function decreaseMonth() {
 
 async function setMonth(month) {
 	//console.log('setting month')
-	//console.log(activeMonth)
-	//console.log(month)
 	if (month === activeMonth.toString()) {
 		return
 	}
@@ -205,7 +203,8 @@ async function doTheWork(index) {
 	await changeMountain(mountains[index]);
 	let foundDay = false
 	for (day of desiredDays) {
-		foundDay = foundDay || await tryReserveDay(day)
+		//console.log("loop processing day " + day)
+		foundDay = (await tryReserveDay(day)) || foundDay
 	}
 	if (!foundDay) {
 		nextMountain(index)
