@@ -1,5 +1,5 @@
-desiredDays = ['12/25','1/3']
-mountains = ['3']
+desiredDays = ['2/20']
+mountains = ['4']
 people = ['daniel gorman']
 
 // Afton Alps				=	"11"
@@ -201,7 +201,56 @@ async function finalizeReservations() {
 	$(".passholder_reservations__completion__cta button")[0].click()
 }
 
+async function extendSession() {
+	// Extend our session and clear the dialog if it's up.
+	await requirejs(['FR', 'jquery', 'underscore', 'moment', 'services/freerideRestApi'], function(FR, $, _, moment, restApi) {
+
+		var _helper = {
+			closeModal: function closeModal() {
+			FR.$el.window.trigger('global-modal-close');
+			},
+			openModal: function openModal() {
+			var template = _helper.getTemplate();
+	
+			setTimeout(function() {
+				FR.$el.window.trigger('global-modal-open', [template]);
+			}, 1000);
+			},
+			getTemplate: function getTemplate() {
+			var template = _.template(_$el.template.html());
+	
+			return template({});
+			},
+			startSessionWarning: function startSessionWarning() {
+			if (FR.$el.body.attr('data-session-active') === 'true' && FR.$el.body.attr('data-user-authentication-status') === 'logged in') {
+				_showModalTime = moment().add(parseInt(FR.$el.body.attr('data-session-time'), 10) - 2, 'm');
+	
+				//_helper.checkForSessionWarning();
+			}
+			}
+		}
+		console.log("extending session");
+		restApi.extendSession({}, function(response) {
+			_helper.closeModal();
+	
+			if (response.success === true) {
+			console.log("successful extend");
+			FR.$el.body.attr('data-session-time', response.data);
+	
+			_helper.startSessionWarning();
+	
+			FR.$el.window.trigger('session-extended');
+			} else {
+			console.log("unsuccessful extend");
+	
+			}
+		});
+	});
+}
+
 async function doTheWork(index) {
+	await extendSession();
+
 	await changeMountain(mountains[index]);
 	let foundDay = false
 	for (day of desiredDays) {
