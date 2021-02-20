@@ -1,5 +1,5 @@
 desiredDays = ['2/20']
-mountains = ['4']
+mountains = ['14']
 people = ['daniel gorman']
 
 // Afton Alps				=	"11"
@@ -229,19 +229,19 @@ async function extendSession() {
 			}
 			}
 		}
-		console.log("extending session");
+		//console.log("extending session");
 		restApi.extendSession({}, function(response) {
 			_helper.closeModal();
 	
 			if (response.success === true) {
-			console.log("successful extend");
+			//console.log("successful extend");
 			FR.$el.body.attr('data-session-time', response.data);
 	
 			_helper.startSessionWarning();
 	
 			FR.$el.window.trigger('session-extended');
 			} else {
-			console.log("unsuccessful extend");
+			//console.log("unsuccessful extend");
 	
 			}
 		});
