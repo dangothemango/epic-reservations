@@ -1,5 +1,9 @@
 # epic-reservations
-This repo contains various scripts to automatically reserve ski days for epic pass. Feel free to use them within the bounds of the epic pass terms of service (note: I dont actually know if the terms of service allow the use of scripts to make reservations so use at your own risk as well). Each of the scripts in this repo will continuously check availability at a given list of mountains as well as make and confirm your reservation if an availability is found
+This repo contains various scripts to automatically reserve ski days for epic pass. Feel free to use them within the bounds of the epic pass terms of service (note: I dont actually know if the terms of service allow the use of scripts to make reservations so use at your own risk as well). Each of the scripts in this repo will continuously check availability at a given list of mountains as well as make and confirm your reservation if an availability is found. If you use and you like it, you can support me here. No obligation but greatly appreciated
+
+<a href="https://www.buymeacoffee.com/dangorman" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="Buy Me A Coffee" height="41" width="174" >
+</a>
 
 ## Repo Contents
 - [Timeout Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/timeoutReservationMaker.js)
