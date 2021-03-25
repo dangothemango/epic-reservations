@@ -1,5 +1,6 @@
-desiredDays = ['3/13']
+desiredDays = ['3/20']
 mountains = ['Kirkwood'] // use the name
+ageGroup = 'Adult' // Only needed for Ski With A Friend. Options: Adult, Child, Senior, Teen
 
 // Afton Alps               =   "11"
 // Alpine Valley            =   "232"
@@ -166,6 +167,15 @@ async function tryReserveDay(day) {
 
 async function finalizeReservations() {
     await waitForLoad()
+    console.log('Found. Finalizing reservations...')
+
+    // Only used for SWAF
+    ageGroupOption = document.getElementById("benefit_ticket_modal__content__age_group_input")
+    if (ageGroupOption) {
+        nativeSelectValueSetter.call(ageGroupOption, ageGroup)
+        ageGroupOption.dispatchEvent(changeEvent)
+    }
+
     $("#benefit_ticket_modal__content__attestment_input")[0].checked = true
     //$("#benefit_ticket_modal__content__attestment_input")[0].click()
     document.getElementsByClassName('benefit_ticket_modal__option_submit primaryCTA')[0].click()

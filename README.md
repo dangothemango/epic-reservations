@@ -10,8 +10,8 @@ This repo contains various scripts to automatically reserve ski days for epic pa
   - This script uses a configurable delay between actions. The purpose of this delay is to wait for api calls and loading times. ***Warning: this has not been updated with feature improvements only use this if the async script fails for some reason*** 
 - [Async Function Based Reservation Script](https://github.com/dangothemango/epic-reservations/blob/main/scripts/asyncReservationMaker.js)
   - This script is based on async function calls and can detect when the epic pass reservation page is loading. This checks availablility at a theoretically optimal rate.
-- [Async Reservation Script for Buddy Passes](https://github.com/dangothemango/epic-reservations/blob/main/scripts/asyncReservationMaker_buddy.js)
-  - This script is the same as the async script above, but for reserving buddy passes. Because this option requires payment, you would still have to check out manually (do so quickly before someone else snags the spot). You only need to use this script if the desired day is already booked. I've had a 100% success rate with finding a spot even if it's booked. See usage instructions [below](#usage-instructions-buddy-pass).
+- [Async Reservation Script for Buddy Passes / SWAF](https://github.com/dangothemango/epic-reservations/blob/main/scripts/asyncReservationMaker_buddy.js)
+  - This script is the same as the async script above, but for reserving buddy passes or Ski With A Friend (SWAF) passes. Because this option requires payment, you would still have to check out manually (do so quickly before someone else snags the spot). You only need to use this script if the desired day is already booked. I've had a 100% success rate with finding a spot even if it's booked. See usage instructions [below](#usage-instructions-buddy-pass).
 
 ## Usage Instructions
 
@@ -33,11 +33,11 @@ This repo contains various scripts to automatically reserve ski days for epic pa
 
 1. Follow steps 1 and 2 from above.
 2. Navigate to the [Season Passes](https://www.epicpass.com/account/my-account.aspx?ma_1=4) tab of the My Account page.
-3. Click on "Benefit Tickets", then "Buy for a Buddy", then "Get Started".
+3. Click on "Benefit Tickets", then "Buy for a Buddy" or "Ski With A Friend", then "Get Started".
 4. Open up the JavaScript Web console. On Chrome for the Mac, it's Option+Command+J. You can also do this by right clicking, selecting inspect element, and then clicking "Console", but its different by browser. If you're confused, Google it.
 5. Copy and paste the script with your set variables into the web console. make sure to get the whole thing (cmd+a). (when its pasted make sure to hit enter)
 6. Type `start()` into the console and hit enter.
-7. It will run until it finds an open spot. It will then open a new tab so that you can continue the checkout process. Do so quickly so you don't lose the spot.
+7. It will run until it finds an open spot. It will then open a new tab so that you can continue the checkout process. Do so quickly so you don't lose the spot. If the checkout process fails, please refresh the page and restart from Step 2. Note: It's possible that the code stops running and a new tab does not open - in that case just check manually and there should be an empty spot.
 8. Profit
 
 ## Current Limitations
