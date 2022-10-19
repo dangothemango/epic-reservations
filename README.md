@@ -1,3 +1,6 @@
+# CURRENT STATUS
+This project is not being maintained anymore. Vail Resorts has stopped requireing reservations for their mountains. If anything changes I'll update this
+
 # epic-reservations
 This repo contains various scripts to automatically reserve ski days for epic pass. Feel free to use them within the bounds of the epic pass terms of service (note: I dont actually know if the terms of service allow the use of scripts to make reservations so use at your own risk as well). Each of the scripts in this repo will continuously check availability at a given list of mountains as well as make and confirm your reservation if an availability is found. If you use and you like it, you can support me here. No obligation but greatly appreciated
 
